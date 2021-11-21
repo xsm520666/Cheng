@@ -42,7 +42,7 @@
 
 </body>
 <!--<script src="../dist/bundle.js"></script>-->
-<script src="index.js"></script>
+<!--<script src="index.js"></script>-->
 <script>
 	data = {
 		users: [
@@ -51,7 +51,7 @@
 			{id: 3, name: "c", age: 21}
 		]
 	};
-
+	data.users.reverse();
 	data.users.forEach((value) => {
 		const tbody = document.querySelector('tbody')
 		let instrt = `
@@ -62,7 +62,6 @@
 	<tr/>`
 		tbody.insertAdjacentHTML('beforebegin', instrt)
 	})
-
 	document.onmousemove = function (e, callback) {
 		const ig = document.getElementById("ig");
 		let x = e.clientX + 5;
@@ -74,4 +73,5 @@
 		}
 	}
 </script>
+<!--<script src="../test/test.js"></script>-->
 </html>

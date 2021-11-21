@@ -40,7 +40,7 @@ const bubbleSort = (Array, callback) => {
  * @return {*} 被打乱的数组
  * @constructor
  */
-const Disrupt = (Array, callback) => {
+const disrupt = (Array, callback) => {
 	let i = Array.length;
 	let temp, j;
 	while (i > 0) {
@@ -84,8 +84,80 @@ const selectSorc = (Array, callback) => {
 		callback(Array, minIndex);
 	}
 }
-module.exports={
+/**
+ * 计算1+2+3...+100的和
+ * @param callback 回调函数
+ * @return {number} number
+ */
+const sum = (callback) => {
+	let sum = 0;
+	for (let i = 1; i < 101; i++) {
+		sum += i;
+	}
+	if (callback) {
+		callback(sum);
+	}
+	return sum;
+}
+/**
+ * 计算两个小数
+ * @param num1 num1
+ * @param num2 num2
+ * @param callback 回调函数 n1,n2,v 第一个数字，第二个数字，返回的结果
+ * @return {number} num
+ * @deprecated 计算1.01和2.002会产生非常离谱的错误
+ */
+const addNum = (num1, num2, callback) => {
+	//转化为字符串
+	num1 = num1.toString();
+	num2 = num2.toString();
+	//查看.后面的长度
+	let a, b;
+	if (num1.indexOf(".") !== -1) {
+		a = num1.split(".")[1].length;
+	}
+	if (num2.indexOf(".") !== -1) {
+		b = num2.split(".")[1].length;
+	}
+	//看看谁比谁大
+	let max = a;
+	if (a < b) max = b;
+	//计算倍数关系
+	let multiple = 1;
+	//假设max为2就回执行两次*10就会将结果扩大一百倍
+	for (let i = 0; i < max; i++) {
+		multiple *= 10;
+	}
+	//给小数乘上倍数变成
+	num1 *= multiple;
+	num2 *= multiple;
+	// 返回和并除掉倍数
+	let number = (num1 + num2) / multiple;
+	if (callback) callback((num1/multiple),(num2/multiple),number)
+	return number;
+}
+const numAdd=(num1,num2,callback)=>{
+	num1=num1.toString();
+	num2=num2.toString();
+	let index1=num1.indexOf(".");
+	let index2=num2.indexOf(".");
+	let ws1=0,ws2=0;
+	if (index1!==-1){
+		ws1=num1.split(".")[1].length;
+	}
+	if (index2!==-1){
+		ws2=num2.split(".")[1].length;
+	}
+	//谁大谁小
+	let bigger=(ws1>ws2) ?ws1:ws2;
+	let smaller=(ws1<ws2) ?ws1:ws2;
+	
+	
+}
+module.exports = {
 	bubbleSort,
-    Disrupt,
-    selectSorc
+	disrupt,
+	selectSorc,
+	sum,
+	addNum
 }
