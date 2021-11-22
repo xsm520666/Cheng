@@ -15,7 +15,6 @@
 const CalculateDate = (year, month, day, callback) => {
 	let total = 0;
 	const months = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-	//TODO 干掉下面的内部函数，单独写一个toString
 	if (year % 4 === 0 && year % 100 !== 0 || year % 400 === 0) {
 		months[1] = 29;
 	} else {

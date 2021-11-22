@@ -133,31 +133,125 @@ const addNum = (num1, num2, callback) => {
 	num2 *= multiple;
 	// 返回和并除掉倍数
 	let number = (num1 + num2) / multiple;
-	if (callback) callback((num1/multiple),(num2/multiple),number)
+	if (callback) callback((num1 / multiple), (num2 / multiple), number)
 	return number;
 }
-const numAdd=(num1,num2,callback)=>{
-	num1=num1.toString();
-	num2=num2.toString();
-	let index1=num1.indexOf(".");
-	let index2=num2.indexOf(".");
-	let ws1=0,ws2=0;
-	if (index1!==-1){
-		ws1=num1.split(".")[1].length;
+/**
+ * 计算给定的两个小数
+ * @param num1 数字1
+ * @param num2 数字2
+ * @param callback 回调函数 n1,n2,v第一个数字，第二个数字，计算的结果
+ * @return {number} num
+ */
+const numAdd = (num1, num2, callback) => {
+	//转化为字符串
+	num1 = num1.toString();
+	num2 = num2.toString();
+	//查看.在索引中的位置
+	let index1 = num1.indexOf(".");
+	let index2 = num2.indexOf(".");
+	let ws1 = 0, ws2 = 0;
+	//如果索引结果为不是-1就查看.后面字符的长度
+	if (index1 !== -1) {
+		ws1 = num1.split(".")[1].length;
 	}
-	if (index2!==-1){
-		ws2=num2.split(".")[1].length;
+	if (index2 !== -1) {
+		ws2 = num2.split(".")[1].length;
 	}
-	//谁大谁小
-	let bigger=(ws1>ws2) ?ws1:ws2;
-	let smaller=(ws1<ws2) ?ws1:ws2;
+	//选择大的哪一个数字
+	let bigger = (ws1 > ws2) ? ws1 : ws2;
+	//选择小的哪一个数字
+	let smaller = (ws1 < ws2) ? ws1 : ws2;
+	let zerosCount = bigger - smaller;
+	//去除num里面的.
+	num1 = num1.replace(".", "");
+	num2 = num2.replace(".", "");
+	if (ws1 === smaller) {
+		for (let i = 0; i < zerosCount; i++) {
+			num1 += "0";
+		}
+	} else {
+		for (let i = 0; i < zerosCount; i++) {
+			num2 += "0"
+		}
+	}
+	let number = parseInt(num1) + parseInt(num2);
+	let beishu = 1;
+	for (let i = 0; i < beishu; i++) {
+		beishu *= 10;
+	}
+	number /= beishu;
+	if (callback) {
+		callback((num1 / beishu), (num2 / beishu), number)
+	}
+	return number;
 	
-	
+}
+/**
+ * 二进制函数
+ * @param num 需要转换的数字
+ * @param callback 回调函数 <br/>
+ * num返回需要计算的数字<br/>
+ * res返回结果
+ * @return {string}
+ */
+const binary = (num, callback) => {
+	const res = parseInt(num).toString(2)
+	if (callback) callback(num, res)
+	return res
+}
+/**
+ * 十进制转二进制
+ * @param num 需要转换的数字
+ * @param callback 回调函数 dsc:需要计算的十进制数<br/> temp:计算成功的二进制数字
+ * @return {string}
+ */
+const binary1 = (num, callback) => {
+	let temp = []
+	let dsc = num;
+	while (true) {
+		//语义分析
+		if (num % 2 === 0) {
+			temp.push(0)
+			num /= 2
+		}
+		if (num % 2 !== 0) {
+			temp.push(1)
+			num /= 2
+		}
+		
+		if (Math.sign(num) === -1) {
+			//-1的时候是负数
+			if (num > -1) {
+				//TODO 还差上补码
+				for (let i = 0; i < temp.length; i++) {
+					if (temp[i]===1){
+						temp[i]=0
+					}else {
+						temp[i]=1
+					}
+				}
+				break
+			}
+		}
+		if (Math.sign(num) === 1) {
+			//1的时候是整数
+			if (num < 1) break
+		}
+	}
+	//去掉由数组转化为String产生的","
+	temp.reverse()
+	temp = temp.toString().replaceAll(",", "")
+	if (callback) callback(dsc, temp.toString())
+	return temp.toString()
 }
 module.exports = {
 	bubbleSort,
 	disrupt,
 	selectSorc,
 	sum,
-	addNum
+	addNum,
+	numAdd,
+	binary,
+	binary1
 }

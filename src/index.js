@@ -5,11 +5,11 @@
  */
 
 //测试下列方法使用的data
+const array = require('./array')
+const dom = require('./dom')
+const date = require("./calculateDate");
 "use strict";
 var $ = function () {
-	const array = require('./array.js')
-	const dom = require('./dom')
-	const date = require("./calculateDate");
 	return {
 		array, dom, date
 	}

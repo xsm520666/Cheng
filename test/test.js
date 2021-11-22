@@ -44,7 +44,15 @@ console.log(`map的长度为${length}`)
 for (let key in data) {
 	console.log(`${key}=${data[key]}`)
 }
-
 $.array.addNum(0.1,0.2,(n1,n2,v)=>{
 	console.log(`我是浮点型加法函数：${n1}+${n2}结果是${v}`)
 });
+// $.array.numAdd(1.001,2.002,(n1,n2,v)=>{
+// 	console.log(`${n1}+${n2}的结果是${v}`)
+// })
+$.array.binary1(-124,(o,v)=>{
+	console.log(`我是二进制函数：${o}的结果是${v}`)
+})
+$.array.binary1(124,(o,v)=>{
+	console.log(`我是二进制函数：${o}的结果是${v}`)
+})
