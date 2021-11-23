@@ -4,6 +4,7 @@
  */
 //这是测试单元
 const {$} = require('../src');
+// const {$}=require('../dist/main')
 data = {
 	newarr:[1,2,3,4,5,6,7,8,9],
 	array: [7, 6, 5, 3, 9, 2, 1, 8, 4],
@@ -50,9 +51,12 @@ $.array.addNum(0.1,0.2,(n1,n2,v)=>{
 // $.array.numAdd(1.001,2.002,(n1,n2,v)=>{
 // 	console.log(`${n1}+${n2}的结果是${v}`)
 // })
-$.array.binary1(-124,(o,v)=>{
+$.array.binary(127,(o,v)=>{
 	console.log(`我是二进制函数：${o}的结果是${v}`)
 })
-$.array.binary1(124,(o,v)=>{
+$.array.binary1(-127,(o,v)=>{
+	console.log(`我是二进制函数：${o}的结果是${v}`)
+})
+$.array.binary1(127,(o,v)=>{
 	console.log(`我是二进制函数：${o}的结果是${v}`)
 })

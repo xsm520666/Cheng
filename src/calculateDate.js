@@ -37,7 +37,6 @@ const CalculateDate = (year, month, day, callback) => {
 			callback(str);
 		} else {
 			console.log(str);
-			return str;
 		}
 	}
 	return {

@@ -41,16 +41,17 @@
 </div>
 
 </body>
-<!--<script src="../dist/bundle.js"></script>-->
-<!--<script src="index.js"></script>-->
+
+<script src="../dist/main.js"></script>
+
 <script>
-	data = {
-		users: [
-			{id: 1, name: "a", age: 18},
-			{id: 2, name: "b", age: 43},
-			{id: 3, name: "c", age: 21}
-		]
-	};
+		data = {
+			users: [
+				{id: 1, name: "a", age: 18},
+				{id: 2, name: "b", age: 43},
+				{id: 3, name: "c", age: 21}
+			]
+		};
 	data.users.reverse();
 	data.users.forEach((value) => {
 		const tbody = document.querySelector('tbody')
@@ -72,6 +73,9 @@
 			callback()
 		}
 	}
+	cheng.date.CalculateDate(2019, 1, 1, (v)=>{
+		console.log(v)
+    })
 </script>
 <!--<script src="../test/test.js"></script>-->
 </html>

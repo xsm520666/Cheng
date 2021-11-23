@@ -1,6 +1,7 @@
 /*
  * @CaseyCheng
  * pls...
+ * callback用三元运算提高代码编写效率，复杂判断还是得用if else
  */
 /**
  * bubbleSort is a function that sorts an array of numbers using the bubble sort algorithm.
@@ -29,9 +30,7 @@ const bubbleSort = (Array, callback) => {
 		//操作数-1
 		i--;
 	}
-	if (callback) {
-		callback(Array);
-	}
+	callback ? callback(Array) : null
 }
 /**
  * 打乱这个数组
@@ -50,9 +49,7 @@ const disrupt = (Array, callback) => {
 		Array[i] = Array[j];
 		Array[j] = temp;
 	}
-	if (callback) {
-		callback(Array);
-	}
+	callback?callback(Array):null
 	return Array;
 }
 /**
@@ -80,9 +77,7 @@ const selectSorc = (Array, callback) => {
 	}
 	
 	//回调函数
-	if (callback) {
-		callback(Array, minIndex);
-	}
+	callback ? callback(Array, minIndex) : null
 }
 /**
  * 计算1+2+3...+100的和
@@ -94,9 +89,7 @@ const sum = (callback) => {
 	for (let i = 1; i < 101; i++) {
 		sum += i;
 	}
-	if (callback) {
-		callback(sum);
-	}
+	callback ? callback(sum) : null
 	return sum;
 }
 /**
@@ -133,7 +126,7 @@ const addNum = (num1, num2, callback) => {
 	num2 *= multiple;
 	// 返回和并除掉倍数
 	let number = (num1 + num2) / multiple;
-	if (callback) callback((num1 / multiple), (num2 / multiple), number)
+	callback ? callback((num1 / multiple), (num2 / multiple), number) : null
 	return number;
 }
 /**
@@ -181,9 +174,7 @@ const numAdd = (num1, num2, callback) => {
 		beishu *= 10;
 	}
 	number /= beishu;
-	if (callback) {
-		callback((num1 / beishu), (num2 / beishu), number)
-	}
+	callback ? callback((num1 / beishu), (num2 / beishu), number) : null
 	return number;
 	
 }
@@ -197,11 +188,11 @@ const numAdd = (num1, num2, callback) => {
  */
 const binary = (num, callback) => {
 	const res = parseInt(num).toString(2)
-	if (callback) callback(num, res)
+	callback ? callback(num, res) : null
 	return res
 }
 /**
- * 十进制转二进制
+ * 十进制转二进制 整数
  * @param num 需要转换的数字
  * @param callback 回调函数 dsc:需要计算的十进制数<br/> temp:计算成功的二进制数字
  * @return {string}
@@ -221,28 +212,40 @@ const binary1 = (num, callback) => {
 		}
 		
 		if (Math.sign(num) === -1) {
-			//-1的时候是负数
+			//sing为-1的时候是负数
 			if (num > -1) {
 				//TODO 还差上补码
 				for (let i = 0; i < temp.length; i++) {
-					if (temp[i]===1){
-						temp[i]=0
-					}else {
-						temp[i]=1
+					(temp[i] === 1) ? temp[i] = 0 : temp[i] = 1
+				}
+				//TODO 补码！！！
+				if (temp.length<8) {
+					let i=8-temp.length;
+					for (let j=0; j <i ; j++) {
+						temp.push(1)
+						temp[0]=1
 					}
 				}
 				break
 			}
 		}
 		if (Math.sign(num) === 1) {
-			//1的时候是整数
-			if (num < 1) break
+			//sing为1的时候是正数
+			if (num < 1) {
+				if (temp.length<8) {
+					let i=8-temp.length;
+					for (let j=0; j <i ; j++) {
+						temp.push(0)
+					}
+				}
+				break
+			}
 		}
 	}
 	//去掉由数组转化为String产生的","
 	temp.reverse()
 	temp = temp.toString().replaceAll(",", "")
-	if (callback) callback(dsc, temp.toString())
+	callback ? callback(dsc, temp.toString()) : null
 	return temp.toString()
 }
 module.exports = {
