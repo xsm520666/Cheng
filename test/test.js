@@ -51,12 +51,21 @@ $.array.addNum(0.1,0.2,(n1,n2,v)=>{
 // $.array.numAdd(1.001,2.002,(n1,n2,v)=>{
 // 	console.log(`${n1}+${n2}的结果是${v}`)
 // })
-$.array.binary(127,(o,v)=>{
-	console.log(`我是二进制函数：${o}的结果是${v}`)
-})
-$.array.binary1(-127,(o,v)=>{
-	console.log(`我是二进制函数：${o}的结果是${v}`)
-})
-$.array.binary1(127,(o,v)=>{
-	console.log(`我是二进制函数：${o}的结果是${v}`)
-})
+
+// $.array.binary(127,(o,v)=>{
+// 	console.log(`我是node自带二进制函数：${o}的结果是${v}`)
+// })
+// $.array.toBin(-127,(o,v)=>{
+// 	console.log(`我是二进制函数：${o}的结果是${v}`)
+// })
+// $.array.toBin(127,(o,v)=>{
+// 	console.log(`我是二进制函数：${o}的结果是${v}`)
+// })
+// $.array.toBin(253,(o,v)=>{
+// 	console.log(`我是二进制函数：${o}的结果是${v}`)
+// })
+for (let i = 0; i < 1000; i++) {
+	$.array.toBin(i,(o,v)=>{
+		console.log(`我是二进制函数：${o}的结果是${v}`)
+	})
+}

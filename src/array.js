@@ -49,7 +49,7 @@ const disrupt = (Array, callback) => {
 		Array[i] = Array[j];
 		Array[j] = temp;
 	}
-	callback?callback(Array):null
+	callback ? callback(Array) : null
 	return Array;
 }
 /**
@@ -197,44 +197,49 @@ const binary = (num, callback) => {
  * @param callback 回调函数 dsc:需要计算的十进制数<br/> temp:计算成功的二进制数字
  * @return {string}
  */
-const binary1 = (num, callback) => {
-	let temp = []
+const toBin = (num, callback) => {
+	//计算结果的存储池
+	let temp = [];
+	//用于进入正数负数判断,和num同时计算，但是不取整，因为num需要取整到了最后会一直算0，0就没法判断正数负数了
 	let dsc = num;
+	//保存最初的值
+	const call=num;
+	//先把0丢出去 干翻异常！！！
+	if (num === 0) {
+		callback(call, '00000000')
+		return '00000000'
+	}
 	while (true) {
-		//语义分析
-		if (num % 2 === 0) {
-			temp.push(0)
-			num /= 2
-		}
-		if (num % 2 !== 0) {
-			temp.push(1)
-			num /= 2
-		}
-		
-		if (Math.sign(num) === -1) {
-			//sing为-1的时候是负数
+		(num % 2) === 0 ? temp.push(0) : temp.push(1)
+		num=~~(num /= 2)
+		//用于进入正数负数判断
+		dsc /= 2
+		//sing为-1的时候是负数
+		if (Math.sign(dsc) === -1) {
 			if (num > -1) {
-				//TODO 还差上补码
+				//将数组里面的1和0反转
 				for (let i = 0; i < temp.length; i++) {
 					(temp[i] === 1) ? temp[i] = 0 : temp[i] = 1
 				}
 				//TODO 补码！！！
-				if (temp.length<8) {
-					let i=8-temp.length;
-					for (let j=0; j <i ; j++) {
+				//计算结束后num是负数的并且小于1时检查长度是否有八个字段，没有就往最右边添加个1并且在最左边的值修改为1
+				if (temp.length < 8) {
+					let i = 8 - temp.length;
+					for (let j = 0; j < i; j++) {
 						temp.push(1)
-						temp[0]=1
+						temp[0] = 1
 					}
 				}
 				break
 			}
 		}
-		if (Math.sign(num) === 1) {
-			//sing为1的时候是正数
+		//sing为1的时候是正数
+		if (Math.sign(dsc) === 1) {
+			//计算结束后num是正数的并且小于1时检查长度是否有八个字段，没有就往最右边添加个0
 			if (num < 1) {
-				if (temp.length<8) {
-					let i=8-temp.length;
-					for (let j=0; j <i ; j++) {
+				if (temp.length < 8) {
+					let i = 8 - temp.length;
+					for (let j = 0; j < i; j++) {
 						temp.push(0)
 					}
 				}
@@ -242,10 +247,11 @@ const binary1 = (num, callback) => {
 			}
 		}
 	}
-	//去掉由数组转化为String产生的","
+	//颠倒出栈入栈顺序
 	temp.reverse()
+	//去掉由数组转化为String产生的","
 	temp = temp.toString().replaceAll(",", "")
-	callback ? callback(dsc, temp.toString()) : null
+	callback ? callback(call, temp.toString()) : null
 	return temp.toString()
 }
 module.exports = {
@@ -256,5 +262,5 @@ module.exports = {
 	addNum,
 	numAdd,
 	binary,
-	binary1
+	toBin
 }
