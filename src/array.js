@@ -192,7 +192,7 @@ const binary = (num, callback) => {
 	return res
 }
 /**
- * 十进制转二进制 整数
+ * 十进制转二进制 负数Bug挺多，不要拿它算负数
  * @param num 需要转换的数字
  * @param callback 回调函数 dsc:需要计算的十进制数<br/> temp:计算成功的二进制数字
  * @return {string}
@@ -203,7 +203,7 @@ const toBin = (num, callback) => {
 	//用于进入正数负数判断,和num同时计算，但是不取整，因为num需要取整到了最后会一直算0，0就没法判断正数负数了
 	let dsc = num;
 	//保存最初的值
-	const call=num;
+	const call = num;
 	//先把0丢出去 干翻异常！！！
 	if (num === 0) {
 		callback(call, '00000000')
@@ -211,12 +211,12 @@ const toBin = (num, callback) => {
 	}
 	while (true) {
 		(num % 2) === 0 ? temp.push(0) : temp.push(1)
-		num=~~(num /= 2)
+		num = ~~(num /= 2)
 		//用于进入正数负数判断
 		dsc /= 2
 		//sing为-1的时候是负数
 		if (Math.sign(dsc) === -1) {
-			if (num > -1) {
+			if (dsc > -1) {
 				//将数组里面的1和0反转
 				for (let i = 0; i < temp.length; i++) {
 					(temp[i] === 1) ? temp[i] = 0 : temp[i] = 1
@@ -226,9 +226,10 @@ const toBin = (num, callback) => {
 				if (temp.length < 8) {
 					let i = 8 - temp.length;
 					for (let j = 0; j < i; j++) {
-						temp.push(1)
-						temp[0] = 1
+						// temp.push(1)
+						temp.unshift(1)
 					}
+					temp[temp.length] = 1
 				}
 				break
 			}
@@ -236,7 +237,7 @@ const toBin = (num, callback) => {
 		//sing为1的时候是正数
 		if (Math.sign(dsc) === 1) {
 			//计算结束后num是正数的并且小于1时检查长度是否有八个字段，没有就往最右边添加个0
-			if (num < 1) {
+			if (dsc < 1) {
 				if (temp.length < 8) {
 					let i = 8 - temp.length;
 					for (let j = 0; j < i; j++) {

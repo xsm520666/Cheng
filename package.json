@@ -4,7 +4,8 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "bulid": "webpack"
+    "bulid": "webpack",
+    "test": "node test/testArray.js > test/bin.txt"
   },
   "keywords": [],
   "author": "",

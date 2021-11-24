@@ -6,7 +6,7 @@
 const {$} = require('../src');
 // const {$}=require('../dist/main')
 data = {
-	newarr:[1,2,3,4,5,6,7,8,9],
+	newarr: [1, 2, 3, 4, 5, 6, 7, 8, 9],
 	array: [7, 6, 5, 3, 9, 2, 1, 8, 4],
 	arrayy: [7, 6, 5, 3, 9, 2, 1, 8, 4],
 	date: {year: 2008, month: 8, day: 8},
@@ -36,16 +36,16 @@ console.log(`我是打乱前的数组：${data.arrayy}`)
 $.array.disrupt(data.arrayy, (v) => {
 	console.log(`我专门打乱数组：${v}`)
 })
-$.array.sum((v)=>{
+$.array.sum((v) => {
 	console.log(`我是求和函数:1+2+3...+100的值为：${v}`)
 })
-let map=new Array(8);
+let map = new Array(8);
 let length = map.length;
 console.log(`map的长度为${length}`)
 for (let key in data) {
 	console.log(`${key}=${data[key]}`)
 }
-$.array.addNum(0.1,0.2,(n1,n2,v)=>{
+$.array.addNum(0.1, 0.2, (n1, n2, v) => {
 	console.log(`我是浮点型加法函数：${n1}+${n2}结果是${v}`)
 });
 // $.array.numAdd(1.001,2.002,(n1,n2,v)=>{
@@ -64,8 +64,3 @@ $.array.addNum(0.1,0.2,(n1,n2,v)=>{
 // $.array.toBin(253,(o,v)=>{
 // 	console.log(`我是二进制函数：${o}的结果是${v}`)
 // })
-for (let i = 0; i < 1000; i++) {
-	$.array.toBin(i,(o,v)=>{
-		console.log(`我是二进制函数：${o}的结果是${v}`)
-	})
-}
