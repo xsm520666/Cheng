@@ -10,6 +10,12 @@ for (let i = -10000; i < 0; i++) {
 		console.log(`我是二进制函数：${o}的结果是${v}`)
 	})
 }
+// $.array.toBin(999,(o,v)=>{
+// 	console.log(`我是二进制函数：${o}的结果是${v}`)
+// })
+// $.array.toBin(-999,(o,v)=>{
+// 	console.log(`我是二进制函数：${o}的结果是${v}`)
+// })
 // for (let i = 0; i < 1000; i++) {
 // 	$.array.toBin(i, (o, v) => {
 // 		console.log(`${v}`)

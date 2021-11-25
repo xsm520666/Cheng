@@ -30,7 +30,9 @@ const bubbleSort = (Array, callback) => {
 		//操作数-1
 		i--;
 	}
-	callback ? callback(Array) : null
+	if (callback){
+		callback(Array);
+	}
 }
 /**
  * 打乱这个数组
@@ -49,7 +51,9 @@ const disrupt = (Array, callback) => {
 		Array[i] = Array[j];
 		Array[j] = temp;
 	}
-	callback ? callback(Array) : null
+	if (callback){
+		callback(Array)
+	}
 	return Array;
 }
 /**
@@ -77,7 +81,9 @@ const selectSorc = (Array, callback) => {
 	}
 	
 	//回调函数
-	callback ? callback(Array, minIndex) : null
+	if (callback){
+		callback(Array,minIndex);
+	}
 }
 /**
  * 计算1+2+3...+100的和
@@ -89,7 +95,9 @@ const sum = (callback) => {
 	for (let i = 1; i < 101; i++) {
 		sum += i;
 	}
-	callback ? callback(sum) : null
+	if (callback) {
+        callback(sum)
+    }
 	return sum;
 }
 /**
@@ -126,7 +134,9 @@ const addNum = (num1, num2, callback) => {
 	num2 *= multiple;
 	// 返回和并除掉倍数
 	let number = (num1 + num2) / multiple;
-	callback ? callback((num1 / multiple), (num2 / multiple), number) : null
+	if (callback){
+		callback((num1 / multiple), (num2 / multiple), number)
+	}
 	return number;
 }
 /**
@@ -174,7 +184,9 @@ const numAdd = (num1, num2, callback) => {
 		beishu *= 10;
 	}
 	number /= beishu;
-	callback ? callback((num1 / beishu), (num2 / beishu), number) : null
+	if (callback){
+		callback((num1 / beishu), (num2 / beishu), number)
+	}
 	return number;
 	
 }
@@ -209,6 +221,7 @@ const toBin = (num, callback) => {
 		callback(call, '00000000')
 		return '00000000'
 	}
+	if (Math.sign(num)===-1)  num=Math.abs(num)
 	while (true) {
 		(num % 2) === 0 ? temp.push(0) : temp.push(1)
 		num = ~~(num /= 2)
@@ -217,19 +230,12 @@ const toBin = (num, callback) => {
 		//sing为-1的时候是负数
 		if (Math.sign(dsc) === -1) {
 			if (dsc > -1) {
-				//将数组里面的1和0反转
-				for (let i = 0; i < temp.length; i++) {
-					(temp[i] === 1) ? temp[i] = 0 : temp[i] = 1
-				}
-				//TODO 补码！！！
-				//计算结束后num是负数的并且小于1时检查长度是否有八个字段，没有就往最右边添加个1并且在最左边的值修改为1
+				//计算结束后num是负数的并且小于1时检查长度是否有八个字节，没有就填充1
 				if (temp.length < 8) {
 					let i = 8 - temp.length;
 					for (let j = 0; j < i; j++) {
-						// temp.push(1)
-						temp.unshift(1)
+						temp.push(0)
 					}
-					temp[temp.length] = 1
 				}
 				break
 			}
@@ -252,7 +258,9 @@ const toBin = (num, callback) => {
 	temp.reverse()
 	//去掉由数组转化为String产生的","
 	temp = temp.toString().replaceAll(",", "")
-	callback ? callback(call, temp.toString()) : null
+	if (callback){
+		callback(call, temp.toString())
+	}
 	return temp.toString()
 }
 module.exports = {
