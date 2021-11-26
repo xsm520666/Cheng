@@ -5,7 +5,8 @@
  */
 
 /**
- * 二进制函数
+ * 二进制函数<br/>
+ * 这个自带的听说无法计算负整数的二进制，所以改用自己写的
  * @param num 需要转换的数字
  * @param callback 回调函数 <br/>
  * num返回需要计算的数字<br/>
@@ -18,7 +19,8 @@ const binary = (num, callback) => {
 	return res
 }
 /**
- * 十进制转二进制 负数Bug挺多，不要拿它算负数
+ * 现在可以运算负数了，不过数字多了可能看着眼瞎<br/>
+ * <s/>十进制转二进制 负数Bug挺多，不要拿它算负数
  * @param num 需要转换的数字
  * @param callback 回调函数 dsc:需要计算的十进制数<br/> temp:计算成功的二进制数字
  * @return {string}
@@ -46,7 +48,9 @@ const toBin = (num, callback) => {
 		if (Math.sign(dsc) === -1) {
 			if (dsc > -1) {
 				//如何获取一个二进制数的负数符号位？
-				while (temp.length < (getBinLength(Math.abs(call)))+4) temp = "0" + temp;
+				// while (temp.length < (getBinLength(Math.abs(call)))+4) temp = "0" + temp;
+				while (temp.length < (Math.ceil(Math.log2(Math.abs(call))))+2) temp = "0" + temp;
+				while (temp.length%8!==0) temp="0"+temp;
 				//反码，最高位不变，其它的全部反转
 				for (let i = 0; i < temp.length; i++) {
 					(temp[i] === "1") ?
@@ -56,9 +60,7 @@ const toBin = (num, callback) => {
 				//听说最高位好像一直是1
 				temp = replaceBin(temp, 0, "1")
 				//计算补码
-				addBin(temp, "1", (n1, n2, res) => {
-					temp = res
-				})
+				addBin(temp, "1", (n1, n2, res) => temp = res)
 				break
 			}
 		}
@@ -117,9 +119,10 @@ const replaceBin = (str, index, char) => {
 	return strAry.join('');
 }
 /**
- * 获取一个数字的二进制长度
+ * 获取一个数字所需要的二进制长度
  * @param num
  * @param callback 回调函数
+ * @deprecated
  */
 const getBinLength=(num,callback)=>{
 	let c=0;
@@ -130,6 +133,18 @@ const getBinLength=(num,callback)=>{
 	if (callback) callback(c);
 	return c;
 }
+/**
+ * 获取一个数字所需要的二进制长度
+ * @param num
+ * @param callback 回调函数
+ */
+const getBinlength=(num,callback)=>{
+	num=Math.abs(num);
+	num=Math.log2(num);
+	num=Math.ceil(num);
+	if (callback) callback(num);
+	return num;
+}
 module.exports = {
-	toBin, addBin, replaceBin, binary,getBinLength
+	toBin, addBin, replaceBin, binary,getBinLength,getBinlength
 }

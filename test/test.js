@@ -48,22 +48,22 @@ for (let key in data) {
 $.array.addNum(0.1, 0.2, (n1, n2, v) => {
 	console.log(`我是浮点型加法函数：${n1}+${n2}结果是${v}`)
 });
-$.array.addBin("10111","1101",(n1, n2, res)=>{
+$.bin.addBin("10111","1101",(n1, n2, res)=>{
 	console.log(`我是二进制加法函数：${n1}+${n2}结果是${res}`)
 })
-// $.array.numAdd(1.001,2.002,(n1,n2,v)=>{
-// 	console.log(`${n1}+${n2}的结果是${v}`)
-// })
+$.array.numAdd(1.001,2.002,(n1,n2,v)=>{
+	console.log(`${n1}+${n2}的结果是${v}`)
+})
 
-// $.array.binary(127,(o,v)=>{
-// 	console.log(`我是node自带二进制函数：${o}的结果是${v}`)
-// })
-// $.array.toBin(-127,(o,v)=>{
-// 	console.log(`我是二进制函数：${o}的结果是${v}`)
-// })
-// $.array.toBin(127,(o,v)=>{
-// 	console.log(`我是二进制函数：${o}的结果是${v}`)
-// })
-// $.array.toBin(253,(o,v)=>{
-// 	console.log(`我是二进制函数：${o}的结果是${v}`)
-// })
+$.bin.binary(127,(o,v)=>{
+	console.log(`我是node自带二进制函数：${o}的结果是${v}`)
+})
+$.bin.toBin(-127,(o,v)=>{
+	console.log(`我是二进制函数：${o}的结果是${v}`)
+})
+$.bin.toBin(127,(o,v)=>{
+	console.log(`我是二进制函数：${o}的结果是${v}`)
+})
+$.bin.toBin(253,(o,v)=>{
+	console.log(`我是二进制函数：${o}的结果是${v}`)
+})
