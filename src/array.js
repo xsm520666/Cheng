@@ -30,7 +30,7 @@ const bubbleSort = (Array, callback) => {
 		//操作数-1
 		i--;
 	}
-	if (callback){
+	if (callback) {
 		callback(Array);
 	}
 }
@@ -51,7 +51,7 @@ const disrupt = (Array, callback) => {
 		Array[i] = Array[j];
 		Array[j] = temp;
 	}
-	if (callback){
+	if (callback) {
 		callback(Array)
 	}
 	return Array;
@@ -81,8 +81,8 @@ const selectSorc = (Array, callback) => {
 	}
 	
 	//回调函数
-	if (callback){
-		callback(Array,minIndex);
+	if (callback) {
+		callback(Array, minIndex);
 	}
 }
 /**
@@ -90,14 +90,14 @@ const selectSorc = (Array, callback) => {
  * @param callback 回调函数
  * @return {number} number
  */
-const sum = (callback) => {
+const oneSum = (callback) => {
 	let sum = 0;
 	for (let i = 1; i < 101; i++) {
 		sum += i;
 	}
 	if (callback) {
-        callback(sum)
-    }
+		callback(sum)
+	}
 	return sum;
 }
 /**
@@ -134,7 +134,7 @@ const addNum = (num1, num2, callback) => {
 	num2 *= multiple;
 	// 返回和并除掉倍数
 	let number = (num1 + num2) / multiple;
-	if (callback){
+	if (callback) {
 		callback((num1 / multiple), (num2 / multiple), number)
 	}
 	return number;
@@ -184,92 +184,10 @@ const numAdd = (num1, num2, callback) => {
 		beishu *= 10;
 	}
 	number /= beishu;
-	if (callback){
+	if (callback) {
 		callback((num1 / beishu), (num2 / beishu), number)
 	}
 	return number;
 	
 }
-/**
- * 二进制函数
- * @param num 需要转换的数字
- * @param callback 回调函数 <br/>
- * num返回需要计算的数字<br/>
- * res返回结果
- * @return {string}
- */
-const binary = (num, callback) => {
-	const res = parseInt(num).toString(2)
-	callback ? callback(num, res) : null
-	return res
-}
-/**
- * 十进制转二进制 负数Bug挺多，不要拿它算负数
- * @param num 需要转换的数字
- * @param callback 回调函数 dsc:需要计算的十进制数<br/> temp:计算成功的二进制数字
- * @return {string}
- */
-const toBin = (num, callback) => {
-	//计算结果的存储池
-	let temp = [];
-	//用于进入正数负数判断,和num同时计算，但是不取整，因为num需要取整到了最后会一直算0，0就没法判断正数负数了
-	let dsc = num;
-	//保存最初的值
-	const call = num;
-	//先把0丢出去 干翻异常！！！
-	if (num === 0) {
-		callback(call, '00000000')
-		return '00000000'
-	}
-	if (Math.sign(num)===-1)  num=Math.abs(num)
-	while (true) {
-		(num % 2) === 0 ? temp.push(0) : temp.push(1)
-		num = ~~(num /= 2)
-		//用于进入正数负数判断
-		dsc /= 2
-		//sing为-1的时候是负数
-		if (Math.sign(dsc) === -1) {
-			if (dsc > -1) {
-				//计算结束后num是负数的并且小于1时检查长度是否有八个字节，没有就填充1
-				if (temp.length < 8) {
-					let i = 8 - temp.length;
-					for (let j = 0; j < i; j++) {
-						temp.push(0)
-					}
-				}
-				break
-			}
-		}
-		//sing为1的时候是正数
-		if (Math.sign(dsc) === 1) {
-			//计算结束后num是正数的并且小于1时检查长度是否有八个字段，没有就往最右边添加个0
-			if (dsc < 1) {
-				if (temp.length < 8) {
-					let i = 8 - temp.length;
-					for (let j = 0; j < i; j++) {
-						temp.push(0)
-					}
-				}
-				break
-			}
-		}
-	}
-	//颠倒出栈入栈顺序
-	temp.reverse()
-	//去掉由数组转化为String产生的","
-	temp = temp.toString().replaceAll(",", "")
-	if (callback){
-		callback(call, temp.toString())
-	}
-	return temp.toString()
-}
-module.exports = {
-	bubbleSort,
-	disrupt,
-	selectSorc,
-	sum,
-	addNum,
-	numAdd,
-	binary,
-	toBin
-}
+module.exports = {bubbleSort, disrupt, selectSorc, oneSum, addNum, numAdd}

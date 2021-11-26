@@ -36,7 +36,7 @@ console.log(`我是打乱前的数组：${data.arrayy}`)
 $.array.disrupt(data.arrayy, (v) => {
 	console.log(`我专门打乱数组：${v}`)
 })
-$.array.sum((v) => {
+$.array.oneSum((v) => {
 	console.log(`我是求和函数:1+2+3...+100的值为：${v}`)
 })
 let map = new Array(8);
@@ -48,6 +48,9 @@ for (let key in data) {
 $.array.addNum(0.1, 0.2, (n1, n2, v) => {
 	console.log(`我是浮点型加法函数：${n1}+${n2}结果是${v}`)
 });
+$.array.addBin("10111","1101",(n1, n2, res)=>{
+	console.log(`我是二进制加法函数：${n1}+${n2}结果是${res}`)
+})
 // $.array.numAdd(1.001,2.002,(n1,n2,v)=>{
 // 	console.log(`${n1}+${n2}的结果是${v}`)
 // })
